@@ -6,7 +6,9 @@ Control your microphone mute state with an AirPods stem press from the macOS men
 
 ## Availability
 
-The **1.0.1** source is available below. A downloadable app is pending Developer ID signing and Apple notarization; no notarized binary is currently published. See [NOTARIZATION.md](NOTARIZATION.md).
+Download [Air Mute 1.0.1 for Apple Silicon Macs](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.1/Air-Mute-1.0.1-macOS-arm64.zip). The app is **Developer ID signed and Apple notarized**, with its notarization ticket stapled. See the [release and checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.1) and [NOTARIZATION.md](NOTARIZATION.md).
+
+Extract the ZIP and move **Air Mute.app** to Applications. Normal macOS first-open and microphone/privacy prompts may still appear.
 
 ## Usage
 
@@ -28,7 +30,7 @@ sh build.sh
 
 The result is `build/Air Mute.app`, built for the host architecture and ad-hoc signed locally. The script does not install or launch it. It refuses to overwrite an existing output app; supply a fresh output directory for another build.
 
-Bundle identifier: `com.fhajjejshipit.airmute`. App name: **Air Mute**. Source build version: **1.0.1**, build **6** (pending notarized release).
+Bundle identifier: `com.fhajjejshipit.airmute`. App name: **Air Mute**. Source build version: **1.0.1**, build **6**.
 
 ## Privacy
 
@@ -40,7 +42,7 @@ Microphone permission is required for gesture reception. Bluetooth access suppli
 
 On October 6, 2026, the gesture/audio implementation was confirmed with physical AirPods Pro 3 stem presses during Codex voice on Apple Silicon, macOS 27.0.1 (AirPods model A3063, firmware 9B42a; Swift 6.4 compiler). CoreAudio readback matched each requested mute/unmute state, and the user confirmed it worked.
 
-The Air Mute branding build was separately compiled and its bundle name, identifier, original icon, embedded notices and ad-hoc signature checked. It was not launched alongside the working utility during the voice session. Its gesture/audio logic is the same verified implementation; only branding and diagnostic labels changed.
+The released build uses the approved compact glass earbuds/red-mute icon and includes the license notices. On October 8, 2026, its Developer ID signature, Apple notarization acceptance, stapled ticket and Gatekeeper acceptance were verified. It was not launched alongside the working utility during the voice session. Its gesture/audio logic is the same verified implementation; only branding and diagnostic labels changed.
 
 The build targets macOS 14 API availability; older macOS releases, Intel builds, AirPods Max and other devices were not tested. Device swaps during an active gesture input connection and crash recovery were not verified. This is an initial release with narrow verified device coverage.
 

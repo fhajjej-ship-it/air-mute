@@ -1,6 +1,6 @@
 # Developer ID release path
 
-The 1.0.1 app awaits Developer ID signing and Apple notarization. A downloadable binary is held until a Developer ID Application signature and accepted Apple notarization ticket are verified. This is distinct from microphone privacy consent, which macOS still requests.
+The [1.0.1 release](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.1) is Developer ID signed and Apple notarized. On October 8, 2026, Apple's submission status was **Accepted**, the ticket was stapled and validated, strict signature verification passed, and Gatekeeper accepted the app as **Notarized Developer ID**. This is distinct from microphone privacy consent, which macOS still requests.
 
 ## Required credentials
 
