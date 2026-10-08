@@ -6,7 +6,7 @@ Control your microphone mute state with an AirPods stem press from the macOS men
 
 ## Availability
 
-Download [Air Mute 1.0.2 for Apple Silicon Macs](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.2/Air-Mute-1.0.2-macOS-arm64.zip). The app is **Developer ID signed and Apple notarized**, with its notarization ticket stapled. See the [release and checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2) and [NOTARIZATION.md](NOTARIZATION.md).
+Download [Air Mute 1.0.2 for Apple Silicon Macs](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.2/Air-Mute-1.0.2-macOS-arm64.zip). See the [release notes and checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2).
 
 Extract the ZIP and move **Air Mute.app** to Applications. Normal macOS first-open and microphone/privacy prompts may still appear.
 
@@ -42,7 +42,7 @@ Microphone permission is required for gesture reception. Bluetooth access suppli
 
 On October 6, 2026, the gesture/audio implementation was confirmed with physical AirPods Pro 3 stem presses during Codex voice on Apple Silicon, macOS 27.0.1 (AirPods model A3063, firmware 9B42a; Swift 6.4 compiler). CoreAudio readback matched each requested mute/unmute state, and the user confirmed it worked.
 
-The released build uses the approved compact glass earbuds/red-mute icon and includes the license notices. On October 8, 2026, its Developer ID signature, Apple notarization acceptance, stapled ticket and Gatekeeper acceptance were verified. Version 1.0.2 was installed and launched on the same Mac, with microphone permission and its AirPods input connection confirmed active. Its gesture/audio logic is unchanged; this update makes the menu bar earbuds white while preserving the green and red state badges.
+The released build uses the approved compact glass earbuds/red-mute icon and includes the license notices. On October 8, 2026, version 1.0.2 was installed and launched on the same Mac, with microphone permission and its AirPods input connection confirmed active. Its gesture/audio logic is unchanged; this update makes the menu bar earbuds white while preserving the green and red state badges.
 
 The build targets macOS 14 API availability; older macOS releases, Intel builds, AirPods Max and other devices were not tested. Device swaps during an active gesture input connection and crash recovery were not verified. This is an initial release with narrow verified device coverage.
 
