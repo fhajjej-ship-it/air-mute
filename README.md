@@ -1,24 +1,61 @@
-# Air Mute
+<div align="center">
+  <img src="AirMute/Resources/AppIcon.png" width="128" height="128" alt="Air Mute app icon" />
+  <h1>Air Mute</h1>
+  <p><strong>Microphone control, right from your AirPods.</strong></p>
+  <p>Squeeze an AirPod stem to mute or unmute your microphone.<br />A small macOS menu bar app keeps the status in view.</p>
+  <p>
+    <a href="https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.2/Air-Mute-1.0.2-macOS-arm64.zip"><strong>Download for Mac ↓</strong></a>
+    &nbsp; · &nbsp;
+    <a href="https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2">Release notes</a>
+  </p>
+  <p>Apple Silicon · macOS 14+ · Free &amp; open source</p>
+</div>
 
-Control your microphone mute state with an AirPods stem press from the macOS menu bar.
+---
 
-![Air Mute icon](AirMute/Resources/AppIcon.png)
+## Small app. Clear feedback.
 
-## Availability
+Keep your hands on your work. Air Mute listens for the AirPods mute gesture and changes your microphone's device mute state. A white earbud icon and a colored badge show where you stand.
 
-Download [Air Mute 1.0.2 for Apple Silicon Macs](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.2/Air-Mute-1.0.2-macOS-arm64.zip). See the [release notes and checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2).
+<div align="center">
+  <img src="docs/assets/menu-bar-states.png" width="520" alt="Air Mute's white menu bar icon: green microphone when unmuted, red slashed microphone when muted" />
+  <p><sub>Actual menu bar artwork, enlarged for clarity.</sub></p>
+</div>
 
-Extract the ZIP and move **Air Mute.app** to Applications. Normal macOS first-open and microphone/privacy prompts may still appear.
+| Stem control | Visible status | Local audio handling |
+| --- | --- | --- |
+| Mute and unmute with a squeeze. | Green means unmuted. Red means muted. | Audio buffers are discarded locally; no recordings are saved or sent. |
 
-## Usage
+## Get started
 
-Quit any other microphone-mute utility before launching a replacement. Allow microphone access when prompted, connect your AirPods, and select them as your default microphone. The app keeps an input connection active to receive mute gestures. Run one microphone-mute utility at a time.
+1. [Download Air Mute 1.0.2](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.2/Air-Mute-1.0.2-macOS-arm64.zip), extract the ZIP, and move **Air Mute.app** to **Applications**.
+2. Quit any other microphone-mute utility, then open Air Mute. Allow microphone and Bluetooth access when macOS asks.
+3. Connect your AirPods and select them as your Mac's microphone.
+4. Squeeze the stem to mute. Squeeze again to unmute. Watch the Air Mute badge for device status.
 
-The white twin-stem menu icon has a **green microphone badge when unmuted** and a **red slashed badge when muted**. Open its menu to view status, toggle mute, reconnect, or quit. Quit attempts to restore the input to unmuted. Cmd+M belongs to this app's menu; it is not a system-wide hotkey.
+Normal macOS first-open and privacy prompts may appear. The release includes a [download checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2).
 
-Air Mute changes the default input device's CoreAudio mute property. A call application's own mute button, including Codex's, may continue to show unmuted even while the device is muted. Use the Air Mute badge for device status.
+## What to expect
 
-## Build from source
+- **Device mute:** Air Mute controls the default input device's CoreAudio mute property. A call app's mute button, including Codex's, may show a different state.
+- **Menu controls:** Open the menu to view status, toggle mute, refresh the connection status, or quit.
+- **Manual startup:** Open Air Mute when you need it. It doesn't install a login item or background daemon.
+- **When quitting:** The current version attempts to unmute the microphone. Check your call's mute state before quitting if you need to remain muted.
+
+## Privacy
+
+Air Mute keeps an input-only microphone connection active to receive AirPods gestures. It discards audio buffers without inspecting samples, saving, transcribing, transmitting, or playing them through speakers. macOS's microphone activity indicator remains active while it runs.
+
+The app contains no network code. Bluetooth access supplies connection status. Diagnostic output can contain device names and Bluetooth addresses, so keep logs private. Quit stops the input connection and gesture handlers; a crash or force-quit may bypass cleanup.
+
+## Compatibility
+
+**Requires an Apple Silicon Mac running macOS 14 or later.** Physical mute/unmute has been verified with **AirPods Pro 3 on macOS 27.0.1**, including during Codex voice. The current version was installed and its AirPods input connection verified on October 8, 2026.
+
+Older macOS versions, Intel builds, AirPods Max, other AirPods models, device swaps during an active connection, and crash recovery have not been verified. Support for these combinations is not promised.
+
+<details>
+<summary><strong>Build from source</strong></summary>
 
 Requires macOS, Apple's Command Line Tools (Swift and the macOS SDK), and Python 3. No additional package dependencies are used.
 
@@ -28,26 +65,14 @@ cd air-mute
 sh build.sh
 ```
 
-The result is `build/Air Mute.app`, built for the host architecture and ad-hoc signed locally. The script does not install or launch it. It refuses to overwrite an existing output app; supply a fresh output directory for another build.
+The result is `build/Air Mute.app`, built for the host architecture and ad-hoc signed locally. The script does not install or launch it and refuses to overwrite an existing output app. Supply a fresh output directory for another build.
 
-Bundle identifier: `com.fhajjejshipit.airmute`. App name: **Air Mute**. Source build version: **1.0.2**, build **7**.
+Bundle identifier: `com.fhajjejshipit.airmute`. Version **1.0.2**, build **7**.
 
-## Privacy
-
-While Air Mute runs, its input-only audio connection receives buffers and discards them locally without inspecting samples, saving, transcribing, transmitting, or playing them through speakers. The microphone activity indicator remains active. No recording is saved, and there is no network code in the application.
-
-Microphone permission is required for gesture reception. Bluetooth access supplies connection status. Diagnostic output can include device names and Bluetooth addresses; keep runtime logs private. No login item or background daemon is installed. Quit stops the input connection and unregisters gesture handlers. Force-kill or a crash may bypass cleanup.
-
-## Verification and limits
-
-On October 6, 2026, the gesture/audio implementation was confirmed with physical AirPods Pro 3 stem presses during Codex voice on Apple Silicon, macOS 27.0.1 (AirPods model A3063, firmware 9B42a; Swift 6.4 compiler). CoreAudio readback matched each requested mute/unmute state, and the user confirmed it worked.
-
-The released build uses the approved compact glass earbuds/red-mute icon and includes the license notices. On October 8, 2026, version 1.0.2 was installed and launched on the same Mac, with microphone permission and its AirPods input connection confirmed active. Its gesture/audio logic is unchanged; this update makes the menu bar earbuds white while preserving the green and red state badges.
-
-The build targets macOS 14 API availability; older macOS releases, Intel builds, AirPods Max and other devices were not tested. Device swaps during an active gesture input connection and crash recovery were not verified. This is an initial release with narrow verified device coverage.
+</details>
 
 ## License
 
-MIT. Source and license provenance are documented in [UPSTREAM.md](UPSTREAM.md); the upstream declared MIT license is preserved verbatim in `upstream/README.md`. The original artwork and changes are included under MIT. Air Mute is based on PodsMute and does not claim exclusive authorship of inherited code.
+[MIT](LICENSE). Air Mute is based on PodsMute; license and source provenance are preserved in [UPSTREAM.md](UPSTREAM.md) and `upstream/README.md`. The app's original artwork and changes are also included under MIT. No exclusive authorship of inherited code is claimed.
 
-This project is separate from similarly named applications; no affiliation or name-clearance claim is made.
+This project is independent of similarly named applications and is not affiliated with Apple.
