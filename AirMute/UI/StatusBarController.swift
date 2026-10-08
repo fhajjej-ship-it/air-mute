@@ -198,9 +198,8 @@ final class StatusBarController {
     private func createStatusBarIcon(isMuted: Bool) -> NSImage {
         let size = NSSize(width: 24, height: 18)
 
-        // Determine if menu bar is dark (needs white icon) or light (needs black icon)
-        let isDark = NSApp.effectiveAppearance.name.rawValue.lowercased().contains("dark")
-        let menuBarColor: NSColor = isDark ? .white : .black
+        // Keep the earbuds white while retaining the colored mute-state badge.
+        let menuBarColor: NSColor = .white
 
         let image = NSImage(size: size, flipped: false) { rect in
             // Original Air Mute twin-stem mark, matching the app icon.

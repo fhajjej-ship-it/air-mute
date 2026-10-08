@@ -6,7 +6,7 @@ Control your microphone mute state with an AirPods stem press from the macOS men
 
 ## Availability
 
-Download [Air Mute 1.0.1 for Apple Silicon Macs](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.1/Air-Mute-1.0.1-macOS-arm64.zip). The app is **Developer ID signed and Apple notarized**, with its notarization ticket stapled. See the [release and checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.1) and [NOTARIZATION.md](NOTARIZATION.md).
+Download [Air Mute 1.0.2 for Apple Silicon Macs](https://github.com/fhajjej-ship-it/air-mute/releases/download/v1.0.2/Air-Mute-1.0.2-macOS-arm64.zip). The app is **Developer ID signed and Apple notarized**, with its notarization ticket stapled. See the [release and checksum](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2) and [NOTARIZATION.md](NOTARIZATION.md).
 
 Extract the ZIP and move **Air Mute.app** to Applications. Normal macOS first-open and microphone/privacy prompts may still appear.
 
@@ -14,7 +14,7 @@ Extract the ZIP and move **Air Mute.app** to Applications. Normal macOS first-op
 
 Quit any other microphone-mute utility before launching a replacement. Allow microphone access when prompted, connect your AirPods, and select them as your default microphone. The app keeps an input connection active to receive mute gestures. Run one microphone-mute utility at a time.
 
-The original twin-stem menu icon has a **green microphone badge when unmuted** and a **red slashed badge when muted**. Open its menu to view status, toggle mute, reconnect, or quit. Quit attempts to restore the input to unmuted. Cmd+M belongs to this app's menu; it is not a system-wide hotkey.
+The white twin-stem menu icon has a **green microphone badge when unmuted** and a **red slashed badge when muted**. Open its menu to view status, toggle mute, reconnect, or quit. Quit attempts to restore the input to unmuted. Cmd+M belongs to this app's menu; it is not a system-wide hotkey.
 
 Air Mute changes the default input device's CoreAudio mute property. A call application's own mute button, including Codex's, may continue to show unmuted even while the device is muted. Use the Air Mute badge for device status.
 
@@ -30,7 +30,7 @@ sh build.sh
 
 The result is `build/Air Mute.app`, built for the host architecture and ad-hoc signed locally. The script does not install or launch it. It refuses to overwrite an existing output app; supply a fresh output directory for another build.
 
-Bundle identifier: `com.fhajjejshipit.airmute`. App name: **Air Mute**. Source build version: **1.0.1**, build **6**.
+Bundle identifier: `com.fhajjejshipit.airmute`. App name: **Air Mute**. Source build version: **1.0.2**, build **7**.
 
 ## Privacy
 
@@ -42,7 +42,7 @@ Microphone permission is required for gesture reception. Bluetooth access suppli
 
 On October 6, 2026, the gesture/audio implementation was confirmed with physical AirPods Pro 3 stem presses during Codex voice on Apple Silicon, macOS 27.0.1 (AirPods model A3063, firmware 9B42a; Swift 6.4 compiler). CoreAudio readback matched each requested mute/unmute state, and the user confirmed it worked.
 
-The released build uses the approved compact glass earbuds/red-mute icon and includes the license notices. On October 8, 2026, its Developer ID signature, Apple notarization acceptance, stapled ticket and Gatekeeper acceptance were verified. It was not launched alongside the working utility during the voice session. Its gesture/audio logic is the same verified implementation; only branding and diagnostic labels changed.
+The released build uses the approved compact glass earbuds/red-mute icon and includes the license notices. On October 8, 2026, its Developer ID signature, Apple notarization acceptance, stapled ticket and Gatekeeper acceptance were verified. Version 1.0.2 was installed and launched on the same Mac, with microphone permission and its AirPods input connection confirmed active. Its gesture/audio logic is unchanged; this update makes the menu bar earbuds white while preserving the green and red state badges.
 
 The build targets macOS 14 API availability; older macOS releases, Intel builds, AirPods Max and other devices were not tested. Device swaps during an active gesture input connection and crash recovery were not verified. This is an initial release with narrow verified device coverage.
 

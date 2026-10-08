@@ -1,6 +1,6 @@
 # Developer ID release path
 
-The [1.0.1 release](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.1) is Developer ID signed and Apple notarized. On October 8, 2026, Apple's submission status was **Accepted**, the ticket was stapled and validated, strict signature verification passed, and Gatekeeper accepted the app as **Notarized Developer ID**. This is distinct from microphone privacy consent, which macOS still requests.
+The [1.0.2 release](https://github.com/fhajjej-ship-it/air-mute/releases/tag/v1.0.2) is Developer ID signed and Apple notarized. On October 8, 2026, Apple's submission status was **Accepted**, the ticket was stapled and validated, strict signature verification passed, and Gatekeeper accepted the app as **Notarized Developer ID**. This is distinct from microphone privacy consent, which macOS still requests.
 
 ## Required credentials
 
@@ -17,12 +17,12 @@ Run from the repository root with a fresh output directory. The following is a p
 ```sh
 export AIR_MUTE_SIGNING_IDENTITY='Developer ID Application: actual configured identity'
 export AIR_MUTE_NOTARY_PROFILE='actual configured keychain profile name'
-sh build.sh build/release-1.0.1
-codesign --force --sign "$AIR_MUTE_SIGNING_IDENTITY" --timestamp --options runtime   --entitlements AirMute/AirMute.entitlements 'build/release-1.0.1/Air Mute.app'
-codesign --verify --strict 'build/release-1.0.1/Air Mute.app'
-codesign -dv --verbose=2 'build/release-1.0.1/Air Mute.app'
-ditto -c -k --keepParent 'build/release-1.0.1/Air Mute.app' build/Air-Mute-1.0.1-notary.zip
-xcrun notarytool submit build/Air-Mute-1.0.1-notary.zip   --keychain-profile "$AIR_MUTE_NOTARY_PROFILE" --output-format json
+sh build.sh build/release-1.0.2
+codesign --force --sign "$AIR_MUTE_SIGNING_IDENTITY" --timestamp --options runtime   --entitlements AirMute/AirMute.entitlements 'build/release-1.0.2/Air Mute.app'
+codesign --verify --strict 'build/release-1.0.2/Air Mute.app'
+codesign -dv --verbose=2 'build/release-1.0.2/Air Mute.app'
+ditto -c -k --keepParent 'build/release-1.0.2/Air Mute.app' build/Air-Mute-1.0.2-notary.zip
+xcrun notarytool submit build/Air-Mute-1.0.2-notary.zip   --keychain-profile "$AIR_MUTE_NOTARY_PROFILE" --output-format json
 ```
 
 Record the returned submission UUID. Check it with `notarytool info`, or wait in bounded intervals:
@@ -34,12 +34,12 @@ xcrun notarytool wait ACTUAL_SUBMISSION_UUID   --keychain-profile "$AIR_MUTE_NOT
 Continue only on status **Accepted**. For a failure, retrieve the notary log and fix the stated defect before submitting again. After acceptance:
 
 ```sh
-xcrun stapler staple 'build/release-1.0.1/Air Mute.app'
-xcrun stapler validate 'build/release-1.0.1/Air Mute.app'
-codesign --verify --strict 'build/release-1.0.1/Air Mute.app'
-spctl --assess --type execute --verbose=2 'build/release-1.0.1/Air Mute.app'
-ditto -c -k --keepParent 'build/release-1.0.1/Air Mute.app' build/Air-Mute-1.0.1-macOS-arm64.zip
-shasum -a 256 build/Air-Mute-1.0.1-macOS-arm64.zip
+xcrun stapler staple 'build/release-1.0.2/Air Mute.app'
+xcrun stapler validate 'build/release-1.0.2/Air Mute.app'
+codesign --verify --strict 'build/release-1.0.2/Air Mute.app'
+spctl --assess --type execute --verbose=2 'build/release-1.0.2/Air Mute.app'
+ditto -c -k --keepParent 'build/release-1.0.2/Air Mute.app' build/Air-Mute-1.0.2-macOS-arm64.zip
+shasum -a 256 build/Air-Mute-1.0.2-macOS-arm64.zip
 ```
 
 Check that the signing authority is Developer ID Application and a TeamIdentifier is present; verify the ticket and Gatekeeper assessment before publishing. Publish a versioned release from the exact reviewed commit. Download that release, compare its checksum and verify the extracted app. Never label a pending or rejected submission as notarized.
